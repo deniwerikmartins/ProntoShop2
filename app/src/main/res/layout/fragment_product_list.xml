@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="4dp"
+    tools:context=".ui.productlist.ProductListFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/product_list_recyclerview"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
+
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/primary"
+        android:text="@string/no_product_found"
+        android:padding="15dp"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_huge"
+        android:textStyle="italic"
+        android:visibility="gone"
+        android:fontFamily="sans-serif-condensed"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:fabSize="normal"
+        android:elevation="6dp"
+        android:src="@drawable/ic_action_add"/>
+
+
+</RelativeLayout>
