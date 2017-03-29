@@ -2,6 +2,7 @@ package okason.com.prontoshop.ui.transaction;
 
 import okason.com.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import okason.com.prontoshop.model.Customer;
+import okason.com.prontoshop.model.LineItem;
 import okason.com.prontoshop.model.SalesTransaction;
 
 import java.util.List;
@@ -30,8 +31,10 @@ public interface TransactionContract {
 
     public interface  Repository{
         List<SalesTransaction> getAllTransactions();
-        void updateTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener);
         SalesTransaction getTransactionById(long id);
         void deleteTransaction(long id, OnDatabaseOperationCompleteListener listener);
+        List<LineItem> getAllLineItems();
+        void saveTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener);
+        void updateTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener);
     }
 }

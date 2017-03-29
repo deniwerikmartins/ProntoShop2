@@ -9,6 +9,7 @@ import okason.com.prontoshop.ui.transaction.TransactionPresenter;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import okason.com.prontoshop.ui.transaction.TransactionSQLiteManager;
 
 /**
  * Created by Valentine on 4/22/2016.
@@ -29,4 +30,5 @@ public interface AppComponent {
     void inject(ProductPresenter presenter);
     void inject(CustomerPresenter presenter);
     void inject(TransactionPresenter presenter);
+    void inject(TransactionSQLiteManager manager);
 }

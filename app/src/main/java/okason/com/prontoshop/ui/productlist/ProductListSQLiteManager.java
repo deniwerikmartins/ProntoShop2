@@ -52,7 +52,7 @@ public class ProductListSQLiteManager implements ProductListContract.Repository{
                 }
             }
         }
-        return null;
+        return products;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class ProductListSQLiteManager implements ProductListContract.Repository{
         }
     }
 
-    private long createOrGetCategoryId(String categoryName, OnDatabaseOperationCompleteListener listener) {
+    public long createOrGetCategoryId(String categoryName, OnDatabaseOperationCompleteListener listener) {
         Category foundCategory = getCategory(categoryName);
         if (foundCategory == null){
             foundCategory = addCategory(categoryName, listener);
@@ -113,14 +113,14 @@ public class ProductListSQLiteManager implements ProductListContract.Repository{
         return foundCategory.getId();
     }
 
-    private Category addCategory(final String categoryName, OnDatabaseOperationCompleteListener listener){
+    public Category addCategory(final String categoryName, OnDatabaseOperationCompleteListener listener){
         Category category = new Category();
         category.setCategoryName(categoryName);
         saveCategory(category, listener);
         return category;
     }
 
-    private void saveCategory(Category category, OnDatabaseOperationCompleteListener listener) {
+    public void saveCategory(Category category, OnDatabaseOperationCompleteListener listener) {
         ContentValues values = new ContentValues();
         values.put(Constants.COLUMN_NAME, category.getCategoryName());
         try {
@@ -130,7 +130,7 @@ public class ProductListSQLiteManager implements ProductListContract.Repository{
         }
     }
 
-    private Category getCategory(String categoryName) {
+    public Category getCategory(String categoryName) {
         Category category = null;
         Cursor cursor = database.rawQuery("SELECT * FROM " + Constants.CATEGORY_TABLE + " " + "WHERE " + Constants.COLUMN_NAME + " = '" + categoryName + "'", null);
         if (cursor.moveToFirst()){

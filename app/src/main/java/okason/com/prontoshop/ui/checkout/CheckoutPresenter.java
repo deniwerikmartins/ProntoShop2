@@ -89,6 +89,9 @@ public class CheckoutPresenter implements CheckoutContract.Actions, OnDatabaseOp
         transaction.setPaymentType(selectedPaymentType);
         transaction.setPaid(paid);
         mRepository.saveTransaction(transaction, this);
+
+        mCart.clearAllItemsFromCart();
+        loadLineItems();
     }
 
     @Override

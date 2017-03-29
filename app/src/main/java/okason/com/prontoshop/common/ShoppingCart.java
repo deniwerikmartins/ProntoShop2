@@ -119,6 +119,10 @@ public class ShoppingCart implements ShoppingCartContract {
 
     @Override
     public void clearAllItemsFromCart() {
+        if (DEBUG){
+            Log.d(LOG_TAG, "Clear Cart Called");
+        }
+
         shoppingCart.clear();
         selectedCustomer = null;
 

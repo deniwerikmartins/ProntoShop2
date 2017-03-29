@@ -1,6 +1,7 @@
 package okason.com.prontoshop.ui.transaction;
 
 import okason.com.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
+import okason.com.prontoshop.model.LineItem;
 import okason.com.prontoshop.model.SalesTransaction;
 
 import java.util.List;
@@ -26,6 +27,16 @@ public class TempRespository implements TransactionContract.Repository {
 
     @Override
     public void deleteTransaction(long id, OnDatabaseOperationCompleteListener listener) {
+
+    }
+
+    @Override
+    public List<LineItem> getAllLineItems() {
+        return null;
+    }
+
+    @Override
+    public void saveTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener) {
 
     }
 }

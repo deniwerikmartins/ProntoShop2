@@ -1,10 +1,14 @@
 package okason.com.prontoshop.model;
 
+import android.database.Cursor;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okason.com.prontoshop.util.Constants;
 
 /**
  * Created by Valentine on 4/25/2016.
@@ -29,6 +33,36 @@ public class SalesTransaction {
     private String jsonLineItems;
 
     public SalesTransaction(){}
+
+    public SalesTransaction(long id, long customerId, double subTotalAmount, double taxAmount, double totalAmount, boolean completed, String paymentType, long transactionDate, long modifiedDate, String jsonLineItems) {
+        this.id = id;
+        this.customerId = customerId;
+        this.subTotalAmount = subTotalAmount;
+        this.taxAmount = taxAmount;
+        this.totalAmount = totalAmount;
+        this.paid = completed;
+        this.paymentType = paymentType;
+        this.transactionDate = transactionDate;
+        this.modifiedDate = modifiedDate;
+        this.jsonLineItems = jsonLineItems;
+    }
+
+    public static SalesTransaction getTransactionFromCursor(Cursor cursor) {
+        long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
+        long customerId = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_CUSTOMER_ID));
+        long dateCreated = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_DATE_CREATED));
+        double subTotal = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_SUB_TOTAL_AMOUNT));
+        String lineItems = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_LINE_ITEMS));
+        double taxAmount = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_TAX_AMOUNT));
+        boolean completed = cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_PAYMENT_STATUS)) > 0;
+        String paymentType = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_PAYMENT_TYPE));
+        double totalAmount = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_TOTAL_AMOUNT));
+        long dateLastUpdated = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_LAST_UPDATED));
+
+        SalesTransaction salesTransaction = new SalesTransaction(id,customerId,subTotal,taxAmount,totalAmount,completed,paymentType,dateCreated,dateLastUpdated,lineItems);
+
+        return salesTransaction;
+    }
 
 
     public long getId() {
@@ -92,7 +126,7 @@ public class SalesTransaction {
     }
 
     public void setTransactionDate(long transactionDate) {
-        this.transactionDate = transactionDate;
+
     }
 
     public long getModifiedDate() {
@@ -124,4 +158,6 @@ public class SalesTransaction {
     public void setJsonLineItems(String jsonLineItems) {
         this.jsonLineItems = jsonLineItems;
     }
+
+
 }
